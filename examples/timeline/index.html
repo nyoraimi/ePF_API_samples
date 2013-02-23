@@ -25,11 +25,12 @@ body { background:#555; }
 		  
 	function xxx() {
 			  
+			  //:  "Access-Control-Allow-Origin: *"
 			  $.ajax({
             url: url,
             crossDomain: true,
-            type: 'POST',
-            datatype: 'application/json',
+            type: 'GET',
+            //datatype: 'application/json',
             headers: { "Accept": "application/vnd.EPF_API.v1+json" },
             success: function(data) {
               
@@ -67,8 +68,8 @@ function s_aaaa_a(s, url){
   var ss = {};
       ss.timeline = {
         //:
-        //"headline":  "Druki sejmowe",
-		    //"text":      "Druki sejmowe to materiały urzędowe dokumentujące prace Sejmu",
+        //: "headline":  "Druki sejmowe",
+		    //: "text":      "Druki sejmowe to materiały urzędowe dokumentujące prace Sejmu",
         //:
         "headline":  s.dataset.name,
 		    "text":      s.dataset.opis,
@@ -111,7 +112,6 @@ function s_aaaa_a(s, url){
             //"caption": "http://orka.sejm.gov.pl/Druki7ka.nsf/0/C7B5B5D3BE88A045C1257B1A00371CC4/%24File/1133.pdf"
           };
           break;
-
       default:
           var d = (2013, 1, 1);
           asset = 
