@@ -25,20 +25,20 @@ body { background:#555; }
 		  
 	function xxx() {
 			  
-			  //:  "Access-Control-Allow-Origin: *"
-			  $.ajax({
+        //:  "Access-Control-Allow-Origin: *"
+        $.ajax({
             url: url,
             crossDomain: true,
             type: 'GET',
-            beforeSend: function(xhr){
-                xhr.withCredentials = true;
+            xhrFields: {
+                withCredentials: true
             },
             //datatype: 'application/json',
             headers: { "Accept": "application/vnd.EPF_API.v1+json" },
             success: function(data) {
               
-            	//alert('Success!' + data);
-            	//alert(data.document.content.dataset.name);
+                //alert('Success!' + data);
+                //alert(data.document.content.dataset.name);
               
               //var r = data;
               //var r = data.document.content.objects.content; //: array
@@ -46,8 +46,8 @@ body { background:#555; }
               var r = data.document.content; //: object
               
               //var r = JSON.stringify(r, null, 2);
-            	
-            	//$('#my-ajax').text(r);              
+                
+                //$('#my-ajax').text(r);              
               
               //: callback
               s_aaaa_a(r, url);
@@ -55,7 +55,7 @@ body { background:#555; }
             }
             
         });
-		}
+    }
             
     //: action  
     rrr = xxx();
