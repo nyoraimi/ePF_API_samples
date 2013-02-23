@@ -8,7 +8,7 @@
 body { background:#555; }
 </style>
 <!-- jQuery -->
-<script type="text/javascript" xxxsrc="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" xxxsrc="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
 <script type="text/javascript" xxxsrc="../../assets/jquery.xdomainajax.js"></script>
 <script type="text/javascript" src="../../assets/using-yql.js"></script>
@@ -31,11 +31,11 @@ body { background:#555; }
         //:  "Access-Control-Allow-Origin: *"
         $.ajax({
             url: url,
-            //crossDomain: true,
-            type: 'GET',
-            //xhrFields: {
-            //    withCredentials: true
-            //},
+            crossDomain: true,
+            //type: 'GET',
+            xhrFields: {
+                withCredentials: true
+            },
             //datatype: 'application/json',
             headers: { "Accept": "application/vnd.EPF_API.v1+json" },
             success: function(data) {
