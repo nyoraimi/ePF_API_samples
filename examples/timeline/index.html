@@ -28,6 +28,8 @@ body { background:#555; }
 			  $.ajax({
             url: url,
             crossDomain: true,
+            type: 'POST',
+            datatype: 'application/json',
             headers: { "Accept": "application/vnd.EPF_API.v1+json" },
             success: function(data) {
               
@@ -46,8 +48,8 @@ body { background:#555; }
               //: callback
               s_aaaa_a(r, url);
               
-            },
-            beforeSend: setHeader
+            }
+            
         });
 		}
             
