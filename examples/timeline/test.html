@@ -1,0 +1,35 @@
+<script>
+var createCORSRequest = function(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // Most browsers.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // IE8 & IE9
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+};
+
+var url = 'http://sejmometr.pl/sejm_posiedzenia';
+var method = 'POST';
+var xhr = createCORSRequest(method, url);
+
+xhr.onload = function() {
+  // Success code goes here.
+  alert('o!');
+};
+
+xhr.onerror = function() {
+  // Error code goes here.
+  alert('no');
+};
+
+xhr.withCredentials = true;
+xhr.setRequestHeader('Accept', 'application/vnd.EPF_API.v1+json');
+xhr.send();
+</script>
