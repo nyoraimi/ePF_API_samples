@@ -27,6 +27,9 @@ body { background:#555; }
 			  
 			  $.ajax({
             url: url,
+            xhrFields: {
+                withCredentials: true
+            },
             headers: { "Accept": "application/vnd.EPF_API.v1+json" },
             success: function(data) {
               
