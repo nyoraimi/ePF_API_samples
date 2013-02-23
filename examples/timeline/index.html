@@ -33,15 +33,16 @@ body { background:#555; }
             url: url,
             crossDomain: true,
             //type: 'GET',
-            xhrFields: {
-                withCredentials: true
-            },
+            //xhrFields: {
+            //    withCredentials: true
+            //},
+            format: 'jsonp',
             //datatype: 'application/json',
             headers: { "Accept": "application/vnd.EPF_API.v1+json" },
             success: function(data) {
               
                 //alert('Success!' + data);
-                alert(data.document.content.dataset.name);
+                //alert(data.document.content.dataset.name);
               
                 //var r = data;
                 //var r = data.document.content.objects.content; //: array
