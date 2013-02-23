@@ -46,19 +46,19 @@ body { background:#555; }
               
                 //:
                 //: alert(JSON.stringify(data, null, 2));
-                //: static file patch
-                data.document = data;
+                //: static file patch -> reversed in *.json file
+                //: data.document = data;
                 //:
                 
-                //alert('Success!' + data);
-                //alert(data.document.content.dataset.name);
+                //: alert('Success!' + data);
+                //: alert(data.document.content.dataset.name);
               
-                //var r = data;
-                //var r = data.document.content.objects.content; //: array
+                //: var r = data;
+                //: var r = data.document.content.objects.content; //: array
                 
                 var r = data.document.content; //: object
                 
-                //var r = JSON.stringify(r, null, 2);
+                //: var r = JSON.stringify(r, null, 2);
                 
                 //$('#my-ajax').text(r);              
               
