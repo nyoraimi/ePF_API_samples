@@ -9,6 +9,7 @@ body { background:#555; }
 </style>
 <!-- jQuery -->
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="../../assets/jquery.xdomainajax.js"></script>
 <!-- BEGIN TimelineJS -->
 <script type="text/javascript" src="compiled/js/storyjs-embed.js"></script>
 <script>
@@ -40,18 +41,18 @@ body { background:#555; }
                 //alert('Success!' + data);
                 //alert(data.document.content.dataset.name);
               
-              //var r = data;
-              //var r = data.document.content.objects.content; //: array
-              
-              var r = data.document.content; //: object
-              
-              //var r = JSON.stringify(r, null, 2);
+                //var r = data;
+                //var r = data.document.content.objects.content; //: array
+                
+                var r = data.document.content; //: object
+                
+                //var r = JSON.stringify(r, null, 2);
                 
                 //$('#my-ajax').text(r);              
               
-              //: callback
-              s_aaaa_a(r, url);
-              
+                //: callback
+                s_aaaa_a(r, url);
+                
             }
             
         });
