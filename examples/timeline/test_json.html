@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.8.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+
+var config = {
+	'group': 'sejmometr-api'
+}
+var url = 'http://groups.google.com/group/' + config.group +
+	'/feed/atom_v1_0_msgs.xml?num=50';
+
+	var xurl = 'http://sejmometr.pl/poslowie';
+	var xurl = 'http://sejmometr.pl/gminy';
+	
+/*
+$.ajax({
+	url: xurl,
+	data: { signature: authHeader },
+	type: "GET",
+	beforeSend: function(xhr){
+		xhr.setRequestHeader('X-Test-Header', 'test-value');
+	},
+	success: function() { 
+		alert('Success!' + authHeader); 
+	}
+});
+*/
+
+//: decode
+//: var r = JSON.stringify(data);
+//: encode
+//: var obj = jQuery.parseJSON('{"name":"John"}');
+//: alert( obj.name === "John" );
+//: to string
+//: var r = jQuery.param( data );
+
+//: pretty print
+//: JSON.stringify({ foo: "lorem", bar: "ipsum" }, null, 4);
+//: JSON.stringify({ foo: "lorem", bar: "ipsum" }, null, '\t');
+
+//: general ajax
+//: $.ajaxSetup({headers: {"X-Test-Header": "test-value"}})
+
+//var j = $.getJSON( xurl );
+//alert('Success!' + JSON.stringify(j));
+/*
+{"document":{"content":{"dataset":{
+	"name":"Gminy",
+	"results_class":"ep_Gmina",
+	"base_alias":"gminy",
+	"table":"pl_gminy",
+	"limit_max":"100",
+	"limit_default":"10",
+	"fts_columns":"pl_gminy.nazwa",
+	"fts_label":"Szukaj gminy:",
+	"fts_mode":"FULLTEXT-BOOLEAN",
+	"sort_field":"gminy.nazwa",
+	"sort_direct":"ASC",
+	"color_items":"1",
+	"id_key":"id",
+	"stats_field":"",
+	"opis":"Baza gmin w Polsce, kompatybilna z rejestrami TERYT i NTS. Zawiera dane teleadresowe oraz przestrzenne",
+	"browse_mode":"DB"
+	}
+	, "objects":{"params":{"offset":0,"limit":"10"},"content":[{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]},{"id":null,"class":"ep_Gmina","data":null,"layers":[],"links":[]}]},"links":[]}
+	, "resource":"ep_Dataset"}}
+*/
+
+var rrr = $.ajax({
+  url: xurl,
+  //headers: {"Accept": "application/vnd.EPF_API.v1+xml"},
+  headers: {"Accept": "application/vnd.EPF_API.v1+json"},
+	success: function(data) { 
+		//alert('Success!' + data);
+		//alert(data.document.content.dataset.name);
+	  //var r = data;
+	  
+	  var r = JSON.stringify(data, null, 2);
+	  
+	  //$.each(r, function (key, element) {
+		//    alert(key); // output: Students, TotalClass..
+		//    alert(element); //output: [{"Name":John,"Grade":17,}, 17..
+		//});
+		
+		$('#content').text(r);
+		$('#contentt').text(r);
+	}
+});
+
+				
+</script>
+</head>
+<body>
+
+░░░ http://sejmometr.pl/gminy<br/>
+░░░ "Accept": "application/vnd.EPF_API.v1+json"
+<hr>
+
+<script>
+document.write(JSON.stringify(rrr, null, 2));
+</script>
+
+<hr>
+
+<textarea id="contentt" style="width:555px;height:333px;font-family:monaco;"></textarea>
+
+<hr>
+
+<pre>
+<div id="content"></div>
+</pre>
+
+</body>
+</html>
