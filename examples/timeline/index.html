@@ -25,7 +25,7 @@ body { background:#555; }
 	var url = 'http://sejmometr.pl/prawo';
 	var url = 'http://sejmometr.pl/sejm_interpelacje';
 	var url = 'http://sejmometr.pl/sejm_posiedzenia';
-	var url = 'http://verikami.github.com/ePF_API_examples/examples/timeline/sejm_posiedzenia.json';
+  var url = 'http://verikami.github.com/ePF_API_examples/examples/timeline/sejm_posiedzenia.json';
 		  
 	function xxx() {
 			  
@@ -44,6 +44,12 @@ body { background:#555; }
             headers: { "Accept": "application/vnd.EPF_API.v1+json" },
             success: function(data) {
               
+                //:
+                //: alert(JSON.stringify(data, null, 2));
+                //: static file patch
+                data.document = data;
+                //:
+                
                 //alert('Success!' + data);
                 //alert(data.document.content.dataset.name);
               
