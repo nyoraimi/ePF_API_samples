@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery Load Example Timeline</title>
+<meta name="description" content="TimelineJS example">
+<style>
+body { background:#555; }
+</style>
+<!-- jQuery -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<!-- BEGIN TimelineJS -->
+<script type="text/javascript" src="compiled/js/storyjs-embed.js"></script>
+<script>
+////////////////////////////////////////////////////////////////////////////////
+////////: https://github.com/veriKami/TimelineJS
+
+////////////////////////////////////////////////////////////////////////////////
+////////: get json
+		  
+	var url = 'http://sejmometr.pl/sejm_druki';
+	var url = 'http://sejmometr.pl/prawo';
+	var url = 'http://sejmometr.pl/sejm_interpelacje';
+	var url = 'http://sejmometr.pl/sejm_posiedzenia';
+		  
+	function xxx() {
+			  
+			  $.ajax({
+            url: url,
+            headers: { "Accept": "application/vnd.EPF_API.v1+json" },
+            success: function(data) {
+              
+            	//alert('Success!' + data);
+            	//alert(data.document.content.dataset.name);
+              
+              //var r = data;
+              //var r = data.document.content.objects.content; //: array
+              
+              var r = data.document.content; //: object
+              
+              //var r = JSON.stringify(r, null, 2);
+            	
+            	//$('#my-ajax').text(r);              
+              
+              //: callback
+              s_aaaa_a(r, url);
+              
+            }
+            
+        });
+		}
+            
+    //: action  
+    rrr = xxx();
+
+////////////////////////////////////////////////////////////////////////////////
+////////: ajax callback
+
+function s_aaaa_a(s, url){
+      
+  //var sss = JSON.stringify(s, null, 2);
+  //alert(sss);
+  
+  var ss = {};
+      ss.timeline = {
+        //:
+        //"headline":  "Druki sejmowe",
+		    //"text":      "Druki sejmowe to materiały urzędowe dokumentujące prace Sejmu",
+        //:
+        "headline":  s.dataset.name,
+		    "text":      s.dataset.opis,
+		    "startDate": "2013,2,1",
+        "type":      "default",
+        "date": []      
+      }
+  
+  s = s.objects.content;
+  
+  for (x in s) {
+  
+      //alert(x); //:-> timeline/ nr array
+      //alert(s.timeline.date[x].startDate);
+      //alert(s[x]);
+      
+      //alert(JSON.stringify(s[x].data, null, 4));
+      //alert (getFullYear(s[x].data.data));
+
+      //: date (url dep.)
+      switch(url) {
+      case 'http://sejmometr.pl/sejm_druki':
+          var d = s[x].data.data.split("-");
+          asset = {};
+          break;
+      case 'http://sejmometr.pl/prawo':
+          var d = s[x].data.data_publikacji.split("-");
+          asset = {};
+          break;
+      case 'http://sejmometr.pl/sejm_interpelacje':
+          var d = s[x].data.data_wplywu.split("-");
+          asset = {};
+          break;
+      case 'http://sejmometr.pl/sejm_posiedzenia':
+          var d = s[x].data.data_start.split("-");
+          asset = {
+            //"media": "http://epanstwo.net/resources/sejm_komunikaty/img/1722-1.jpg",
+            //"media": "http://orka.sejm.gov.pl/Druki7ka.nsf/0/C7B5B5D3BE88A045C1257B1A00371CC4/%24File/1133.pdf",
+            //"credit":  "xxx",
+            //"caption": "http://orka.sejm.gov.pl/Druki7ka.nsf/0/C7B5B5D3BE88A045C1257B1A00371CC4/%24File/1133.pdf"
+          };
+          break;
+
+      default:
+          var d = (2013, 1, 1);
+          asset = 
+          {
+            //"media": "http://epanstwo.net/docs/thumb/2/330862.png",
+            //"media": "http://orka.sejm.gov.pl/Druki7ka.nsf/0/C7B5B5D3BE88A045C1257B1A00371CC4/%24File/1133.pdf",
+            //"credit":  "",
+            //"caption": "http://orka.sejm.gov.pl/Druki7ka.nsf/0/C7B5B5D3BE88A045C1257B1A00371CC4/%24File/1133.pdf"
+          };
+      }
+      
+      var startDate = d[0] + ',' + d[1] + ',' + d[2];
+            
+      ss.timeline.date[x] = {
+        
+        //"startDate":   "2012,1,26",
+        //"startDate":   s.timeline.date[x].startDate,
+        //"headline":    "Projekt uchwały w sprawie ustanowienia roku 2014 Rokiem Rodziny",
+        //"text":        "<p>Sejm Rzeczypospolitej Polskiej dołoży wszelkich starań, w tym poprzez stanowienie odpowiedniego prawa i sprawowanie funkcji kontrolnej, aby rodziny w Rzeczypospolitej Polskiej mogły czuć się bezpiecznie trwając w przeświadczeniu o stałej, opiekuńczej trosce państwa o ich byt materialny i wszechstronny rozwój.</p>",
+
+        "startDate":   startDate,
+        "headline":    s[x].data.tytul,
+        "text":        s[x].data.opis,
+        "asset":       asset      
+            //{
+            //"media": "http://epanstwo.net/docs/thumb/2/330862.png",
+            //"media": "http://orka.sejm.gov.pl/Druki7ka.nsf/0/C7B5B5D3BE88A045C1257B1A00371CC4/%24File/1133.pdf",
+            //"credit":  "",
+            //"caption": "http://orka.sejm.gov.pl/Druki7ka.nsf/0/C7B5B5D3BE88A045C1257B1A00371CC4/%24File/1133.pdf"
+            //}
+      };
+        
+  } //: end for
+  
+  //: create timeline
+  createStoryJS({
+  		type:              'timeline',
+  		width:             '100%',
+  		height:            '555',
+  		//: source: 'example_json.json',
+  		source:            ss,  		
+  		//:
+  	  lang:              'pl',
+		  //start_at_end:      true,
+		  //start_zoom_adjust: '1',
+  		//:
+  		embed_id:          'my-timeline',
+  		debug:             false
+  });
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+$(document).ajaxComplete(function(event, xhr, settings) {
+  //if ( settings.url === "ajax/test.html" ) {
+    //$("#my-ajax-").text( "Triggered ajaxComplete handler. The result is " + xhr.responseText);
+  //}
+});
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+$(document).ready(function() {
+				
+				/*
+				createStoryJS({
+					type:		'timeline',
+					width:		'800',
+					height:		'600',
+					//source:		'example_json.json',
+					//source:		s_json,
+					
+					source:		s_aaaa(),
+					//source:		x_json(s_json),
+					
+					//:
+					embed_id:	'my-timeline',
+					debug:		true
+				});
+				*/			 
+			
+});
+////////////////////////////////////////////////////////////////////////////////
+</script>
+<!-- END TimelineJS -->
+
+</head>
+<body>
+		
+		<div id="my-timeline"></div>		
+		<div id="my-ajax-"></div>
+		
+</body>
+</html>
